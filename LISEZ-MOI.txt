@@ -46,3 +46,16 @@ Textes : les six fichiers HTML. Styles : styles.css. Menu et année : script.js.
 Le générateur build-pages.cjs, conservé dans le dossier de travail parent,
 permet de recréer les six pages à partir d'un seul ensemble de textes.
 Aucun service externe, cookie, traceur ou formulaire n'est chargé.
+
+RÉSEAUX SOCIAUX
+Les liens sont présentés sous « Suivez-nous » / « Follow us » dans la section
+Contact et sous forme d'icônes blanches dans le pied de page des six pages.
+Les zones cliquables mesurent au moins 44 × 44 pixels.
+Facebook : https://www.facebook.com/SandokaiMontreal
+Comptes Facebook et Instagram confirmés par le demandeur.
+Instagram : https://www.instagram.com/sandokai_kobudo/
+Configuration commune : social-links.json, dans le dossier de travail parent.
+Après modification, exécuter node build-pages.cjs pour régénérer les six pages.
+La mention « Site de référence » du pied de page a été retirée en français
+et en anglais. Les sources documentaires restent conservées dans ce document.
+
