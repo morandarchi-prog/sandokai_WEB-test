@@ -1,0 +1,48 @@
+SANDOKAI KOBUDŌ SHUGYŌKAI — SITE BILINGUE
+Version du 29 octobre 2026.
+
+PUBLICATION
+Décompresser l'archive et téléverser tout son contenu à la racine de votre
+hébergement, en conservant les dossiers en/ et assets/.
+Accueil français : index.html
+Pages françaises : iaido.html et jodo.html
+Pages anglaises : en/index.html, en/iaido.html, en/jodo.html
+Aucune installation ni compilation nécessaire sur l'hébergement.
+Vous pouvez aussi ouvrir index.html directement dans votre navigateur.
+
+IDENTITÉ VISUELLE
+Fond : #012F6A. Accents blancs et bleus clairs, sans couleur sable.
+Police : Nimbus Sans Regular, intégrée localement via @font-face.
+Logo PNG fourni par le demandeur; fichier SVG original conservé dans assets/.
+L'affichage masque seulement les marges vides du logo carré, sans modifier
+le fichier fourni. Le logo conserve son fond d'origine.
+
+NAVIGATION
+Menu en haut à droite : Accueil, Iaido, Jodo et Contact.
+Choix Français / English à gauche du menu, avec passage à la même page.
+Les liens de contact ouvrent mailto:info@sandokaikobudo.org.
+Le menu fonctionne sans JavaScript; Échap permet de le fermer avec JavaScript.
+
+CONTENUS ET SOURCES
+Les présentations sont des synthèses originales, et non des reproductions
+intégrales du site de référence. Traduction anglaise de l'ensemble des pages.
+Sources consultées le 29 octobre 2026 :
+https://www.sandokaikobudo.org/
+https://www.sandokaikobudo.org/muso-shinden-ryu-iaido/
+https://www.sandokaikobudo.org/shindo-muso-ryu-jodo/
+https://www.sandokaikobudo.org/cours-et-entrainement/
+Les pages de discipline contiennent un lien vers leur source française.
+L'adresse courriel et le logo sont fournis par le demandeur.
+
+POLICE ET LICENCE
+NimbusSans-Regular.otf est distribué sans modification depuis :
+https://github.com/ArtifexSoftware/urw-base35-fonts
+Fichier : fonts/NimbusSans-Regular.otf
+Les textes de licence du fournisseur sont conservés dans assets/fonts/.
+Source de la police : même dépôt, formats et fichiers d'origine disponibles.
+
+PERSONNALISATION
+Textes : les six fichiers HTML. Styles : styles.css. Menu et année : script.js.
+Le générateur build-pages.cjs, conservé dans le dossier de travail parent,
+permet de recréer les six pages à partir d'un seul ensemble de textes.
+Aucun service externe, cookie, traceur ou formulaire n'est chargé.
