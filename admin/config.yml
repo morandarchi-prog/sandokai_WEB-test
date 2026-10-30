@@ -1,0 +1,315 @@
+{
+  "backend": {
+    "name": "github",
+    "repo": "morandarchi-prog/sandokai_WEB-test",
+    "branch": "feat/articles-bilingues-decap",
+    "base_url": "https://api.netlify.com",
+    "auth_endpoint": "auth",
+    "site_domain": "strong-frangipane-a8f10f.netlify.app"
+  },
+  "site_url": "https://strong-frangipane-a8f10f.netlify.app/",
+  "display_url": "https://strong-frangipane-a8f10f.netlify.app/",
+  "locale": "fr",
+  "publish_mode": "editorial_workflow",
+  "media_folder": "assets/uploads",
+  "public_folder": "/assets/uploads",
+  "collections": [
+    {
+      "name": "articles",
+      "label": "Articles bilingues",
+      "folder": "content/articles",
+      "create": true,
+      "format": "json",
+      "extension": "json",
+      "slug": "{{slug}}",
+      "identifier_field": "slug",
+      "summary": "{{slug}}",
+      "fields": [
+        {
+          "label": "Adresse permanente (ne plus changer après publication)",
+          "name": "slug",
+          "widget": "string",
+          "pattern": [
+            "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "Minuscules, chiffres et tirets seulement"
+          ]
+        },
+        {
+          "label": "Inclure dans le site après validation française",
+          "name": "published",
+          "widget": "boolean",
+          "default": false
+        },
+        {
+          "label": "Traduction anglaise approuvée",
+          "name": "english_approved",
+          "widget": "boolean",
+          "default": false
+        },
+        {
+          "label": "Français",
+          "name": "fr",
+          "widget": "object",
+          "fields": [
+            {
+              "label": "Titre",
+              "name": "title",
+              "widget": "string"
+            },
+            {
+              "label": "Description courte",
+              "name": "description",
+              "widget": "text"
+            },
+            {
+              "name": "author",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "name": "date",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "name": "updated",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "name": "source_markdown",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "name": "source_sha256",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "label": "Image de présentation",
+              "name": "image",
+              "widget": "image",
+              "required": false
+            },
+            {
+              "label": "Description de l’image",
+              "name": "alt",
+              "widget": "string",
+              "required": false
+            },
+            {
+              "label": "Contenu intégral",
+              "name": "blocks",
+              "widget": "list",
+              "types": [
+                {
+                  "label": "Paragraphe",
+                  "name": "paragraph",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Texte",
+                      "name": "text",
+                      "widget": "text"
+                    }
+                  ]
+                },
+                {
+                  "label": "Intertitre H2",
+                  "name": "heading",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Texte",
+                      "name": "text",
+                      "widget": "string"
+                    }
+                  ]
+                },
+                {
+                  "label": "Sous-titre H3 (après un H2)",
+                  "name": "subheading",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Texte",
+                      "name": "text",
+                      "widget": "string"
+                    }
+                  ]
+                },
+                {
+                  "label": "Citation",
+                  "name": "quote",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Texte",
+                      "name": "text",
+                      "widget": "text"
+                    }
+                  ]
+                },
+                {
+                  "label": "Image",
+                  "name": "image",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Image",
+                      "name": "src",
+                      "widget": "image"
+                    },
+                    {
+                      "label": "Description",
+                      "name": "alt",
+                      "widget": "string"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "English (provisoire avant approbation)",
+          "name": "en",
+          "widget": "object",
+          "fields": [
+            {
+              "label": "Titre",
+              "name": "title",
+              "widget": "string"
+            },
+            {
+              "label": "Description courte",
+              "name": "description",
+              "widget": "text"
+            },
+            {
+              "name": "author",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "name": "date",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "name": "updated",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "name": "source_markdown",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "name": "source_sha256",
+              "widget": "hidden",
+              "required": false,
+              "default": ""
+            },
+            {
+              "label": "Image de présentation",
+              "name": "image",
+              "widget": "image",
+              "required": false
+            },
+            {
+              "label": "Description de l’image",
+              "name": "alt",
+              "widget": "string",
+              "required": false
+            },
+            {
+              "label": "Contenu intégral",
+              "name": "blocks",
+              "widget": "list",
+              "types": [
+                {
+                  "label": "Paragraphe",
+                  "name": "paragraph",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Texte",
+                      "name": "text",
+                      "widget": "text"
+                    }
+                  ]
+                },
+                {
+                  "label": "Intertitre H2",
+                  "name": "heading",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Texte",
+                      "name": "text",
+                      "widget": "string"
+                    }
+                  ]
+                },
+                {
+                  "label": "Sous-titre H3 (après un H2)",
+                  "name": "subheading",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Texte",
+                      "name": "text",
+                      "widget": "string"
+                    }
+                  ]
+                },
+                {
+                  "label": "Citation",
+                  "name": "quote",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Texte",
+                      "name": "text",
+                      "widget": "text"
+                    }
+                  ]
+                },
+                {
+                  "label": "Image",
+                  "name": "image",
+                  "widget": "object",
+                  "fields": [
+                    {
+                      "label": "Image",
+                      "name": "src",
+                      "widget": "image"
+                    },
+                    {
+                      "label": "Description",
+                      "name": "alt",
+                      "widget": "string"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
