@@ -66,12 +66,14 @@ class SiteTests(unittest.TestCase):
                 self.assertEqual(len(canon), 1)
                 self.assertTrue(canon[0].startswith('https://'))
 
-    def test_empty_site_and_assets(self):
-        out = builder.build(self.root)
-        self.check_links(out)
-        self.assertIn('Disallow: /', (out / 'robots.txt').read_text())
-        self.assertEqual(len(ET.parse(out / 'sitemap.xml').getroot()), 0)
-        self.assertFalse(list((out / 'articles').glob('*.html')))
+        def test_empty_site_and_assets(self):
+            for article in (self.root / 'content/articles').glob('*.json'):
+                article.unlink()
+            out = builder.build(self.root)
+            self.check_links(out)
+            self.assertIn('Disallow: /', (out / 'robots.txt').read_text())
+            self.assertEqual(len(ET.parse(out / 'sitemap.xml').getroot()), 0)
+            self.assertFalse(list((out / 'articles').glob('*.html')))
 
     def test_bilingual_generation_safe_content_and_reciprocal_languages(self):
         self.fixture()
