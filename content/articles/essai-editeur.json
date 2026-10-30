@@ -1,0 +1,35 @@
+{
+  "published": true,
+  "english_approved": false,
+  "fr": {
+    "author": "",
+    "date": "",
+    "updated": "",
+    "source_markdown": "",
+    "source_sha256": "",
+    "title": "Essai de l’éditeur",
+    "description": "Article temporaire pour vérifier le fonctionnement",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Ceci est un essai"
+      }
+    ]
+  },
+  "en": {
+    "author": "",
+    "date": "",
+    "updated": "",
+    "source_markdown": "",
+    "source_sha256": "",
+    "title": "Editor test",
+    "description": "Temporary article to check the editor",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "This is a test"
+      }
+    ]
+  },
+  "slug": "essai-editeur"
+}
