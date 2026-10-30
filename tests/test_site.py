@@ -33,6 +33,9 @@ class SiteTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name) / 'repo'
         shutil.copytree(builder.ROOT, self.root, ignore=shutil.ignore_patterns('.git', '_site', '__pycache__'))
+        # Keep unit-test settings independent from the deployed CMS configuration.
+        (self.root / 'site.config.json').write_text(json.dumps({'url': 'https://morandarchi-prog.github.io/sandokai_WEB-test/', 'production': False, 'cms_enabled': False}))
+        (self.root / 'admin/config.yml').unlink(missing_ok=True)
 
     def fixture(self, approved=False, published=True):
         # Synthetic test data exists only in a temporary directory, never in published content.
@@ -66,14 +69,14 @@ class SiteTests(unittest.TestCase):
                 self.assertEqual(len(canon), 1)
                 self.assertTrue(canon[0].startswith('https://'))
 
-        def test_empty_site_and_assets(self):
-            for article in (self.root / 'content/articles').glob('*.json'):
-                article.unlink()
-            out = builder.build(self.root)
-            self.check_links(out)
-            self.assertIn('Disallow: /', (out / 'robots.txt').read_text())
-            self.assertEqual(len(ET.parse(out / 'sitemap.xml').getroot()), 0)
-            self.assertFalse(list((out / 'articles').glob('*.html')))
+    def test_empty_site_and_assets(self):
+        for article in (self.root / 'content/articles').glob('*.json'):
+            article.unlink()
+        out = builder.build(self.root)
+        self.check_links(out)
+        self.assertIn('Disallow: /', (out / 'robots.txt').read_text())
+        self.assertEqual(len(ET.parse(out / 'sitemap.xml').getroot()), 0)
+        self.assertFalse(list((out / 'articles').glob('*.html')))
 
     def test_bilingual_generation_safe_content_and_reciprocal_languages(self):
         self.fixture()
@@ -139,3 +142,4 @@ class SiteTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
