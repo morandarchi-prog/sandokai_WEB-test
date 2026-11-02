@@ -1,0 +1,42 @@
+ARTICLES FR/EN — SOURCES ET PUBLICATION
+
+Les pages index.html, iaido.html, jodo.html et leurs équivalents dans en/ sont
+désormais les sources utilisées pour générer le site. Les modifications du site
+en cours de montage dans main sont donc reprises par Netlify ET GitHub Pages.
+Les anciens gabarits templates/pages/ sont conservés mais ne sont plus utilisés.
+
+Les articles sont rédigés dans Decap et enregistrés dans content/articles/*.json.
+Ne pas modifier directement les HTML de articles/ et en/articles/ : ces fichiers
+constituent un aperçu figé fourni lors de l’intégration. Le site publié par le
+workflow reconstruit les pages à partir des JSON à chaque modification de main.
+Une dépublication supprime ainsi la page du nouveau résultat, même si l’ancienne
+copie HTML est encore présente dans le dépôt.
+
+Le workflow .github/workflows/pages.yml construit uniquement le dossier _site/,
+puis publie ce dossier dans GitHub Pages. Dans Settings > Pages > Source,
+sélectionner GitHub Actions. La publication se déclenche lors d’une modification
+de main ou depuis Actions > Publier le site FR-EN sur GitHub Pages > Run workflow.
+Le workflow ne publie pas depuis une autre branche.
+
+Les adresses de GitHub Pages sont obtenues auprès de GitHub au moment du build.
+SANDOKAI_SITE_URL surcharge l’adresse uniquement pour cette construction.
+site.config.json et admin/config.yml conservent leurs réglages Netlify existants.
+Ne pas y remplacer l’adresse Netlify par l’adresse GitHub Pages.
+
+Netlify continue de publier _site/ avec sa commande de construction actuelle.
+Decap reste accessible sur https://strong-frangipane-a8f10f.netlify.app/admin/
+et enregistre sur main. Aucun nouveau secret ni fournisseur OAuth n’est nécessaire.
+La protection d’accès Netlify reste propre à Netlify; GitHub Pages peut être public.
+
+Le mode production reste false. Les pages servies restent noindex,nofollow,
+les traductions non approuvées conservent leur avis provisoire et le sitemap vide
+est intentionnel. Le raccordement du domaine officiel reste une étape séparée.
+
+Sous Windows, utiliser Python en mode UTF-8 :
+  python -X utf8 -m unittest discover -s tests -v
+  python -X utf8 tools/build.py
+
+Le générateur ne réécrit pas les six pages source. Il reconstruit seulement
+le dossier _site de ce projet et refuse un dossier de sortie différent.
+Le nettoyage gère l’attribut lecture seule parfois copié depuis Windows/OneDrive.
+Ne pas stocker de fichiers originaux ou de travail dans _site/.
