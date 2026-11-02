@@ -124,10 +124,11 @@ class SiteTests(unittest.TestCase):
         for prefix in ['', 'en/']:
             for name in ['index.html', 'iaido.html', 'jodo.html']:
                 path = prefix + name
-                original = (self.root / 'templates/pages' / path).read_text()
+                original = (self.root / path).read_text(encoding='utf-8')
                 expected = re.sub(r'<a class="source-link".*?</a>', '', original.split('<body>', 1)[1])
                 actual = (out / path).read_text().split('<body>', 1)[1]
                 actual = actual.replace('<a href="articles.html">Articles</a>', '')
+                expected = expected.replace('<a href="articles.html">Articles</a>', '')
                 self.assertEqual(actual, expected, path)
 
     def test_cms_requires_configuration(self):

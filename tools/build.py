@@ -1,6 +1,8 @@
 """Static bilingual build; Python standard library only. Never writes source pages."""
 from pathlib import Path
 import html
+import os
+import stat
 import json
 import re
 import shutil
@@ -12,9 +14,14 @@ esc = lambda value: html.escape(str(value), quote=True)
 
 
 def build(root=ROOT, out=None):
-    out = out or root / '_site'
-    config = json.loads((root / 'site.config.json').read_text())
-    base = config['url']
+    root = Path(root).resolve()
+    out = Path(out or root / '_site')
+    approved_out = root / '_site'
+    if out.resolve() != approved_out:
+        raise ValueError('La sortie doit etre le dossier _site de ce projet')
+    config = json.loads((root / 'site.config.json').read_text(encoding='utf-8'))
+    override_url = os.environ.get('SANDOKAI_SITE_URL')
+    base = override_url.rstrip('/') + '/' if override_url else config['url']
     parsed = urlparse(base)
     if parsed.scheme != 'https' or not parsed.netloc or parsed.query or parsed.fragment or not base.endswith('/'):
         raise ValueError('url doit être une URL HTTPS terminée par /')
@@ -24,16 +31,24 @@ def build(root=ROOT, out=None):
     if config.get('cms_enabled'):
         if not (root / 'admin/config.yml').is_file():
             raise ValueError('Configuration OAuth absente')
-        if '.invalid' in (root / 'admin/config.yml').read_text():
+        if '.invalid' in (root / 'admin/config.yml').read_text(encoding='utf-8'):
             raise ValueError('Configurer le véritable hôte OAuth')
     if out.exists():
-        shutil.rmtree(out)
+        def writable_output(function, path, error):
+            # Windows/OneDrive may copy the read-only directory attribute.
+            if os.name != 'nt' or not isinstance(error[1], PermissionError):
+                raise error[1]
+            if not Path(path).resolve().is_relative_to(approved_out):
+                raise error[1]
+            os.chmod(path, stat.S_IREAD | stat.S_IWRITE)
+            function(path)
+        shutil.rmtree(out, onerror=writable_output)
     out.mkdir(parents=True)
     for name in ['assets', 'admin']:
         shutil.copytree(root / name, out / name)
     for name in ['styles.css', 'script.js', 'articles.css']:
         shutil.copy2(root / name, out / name)
-    (out / '.nojekyll').write_text('')
+    (out / '.nojekyll').write_text('', encoding='utf-8')
     paths = []
     titles = set()
 
@@ -70,10 +85,12 @@ def build(root=ROOT, out=None):
         prefix = '' if lang == 'fr' else 'en/'
         for page in ['index.html', 'iaido.html', 'jodo.html']:
             path = prefix + page
-            source = (root / 'templates/pages' / path).read_text()
+            source = (root / path).read_text(encoding='utf-8')
             # Preserve authored page body; only remove links dependent on the retiring site.
             source = re.sub(r'<a class="source-link".*?</a>', '', source)
-            source = source.replace('<a href="#contact">Contact</a>', '<a href="articles.html">Articles</a><a href="#contact">Contact</a>')
+            if '<a href="articles.html">Articles</a>' not in source:
+                source = source.replace('<a href="#contact">Contact</a>', '<a href="articles.html">Articles</a><a href="#contact">Contact</a>')
+            source = re.sub(r'<meta\s+name=[\"\']robots[\"\'][^>]*>', '', source, flags=re.I)
             title = re.search(r'<title>(.*?)</title>', source)[1]
             title += ' — Montréal' if lang == 'fr' else ' — Montreal'
             if lang == 'en':
@@ -85,7 +102,7 @@ def build(root=ROOT, out=None):
             source = source.replace('</head>', seo(path, lang, title, description, other) + '</head>')
             target = out / path
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(source)
+            target.write_text(source, encoding='utf-8')
             paths.append(path)
             if page == 'index.html':
                 sources[lang] = source
@@ -123,7 +140,7 @@ def build(root=ROOT, out=None):
     articles = []
     slugs = set()
     for file in sorted((root / 'content/articles').glob('*.json')):
-        item = json.loads(file.read_text())
+        item = json.loads(file.read_text(encoding='utf-8'))
         slug = item['slug']
         if not re.fullmatch('[a-z0-9]+(?:-[a-z0-9]+)*', slug) or slug in slugs or file.stem != slug:
             raise ValueError('Adresse permanente invalide ou dupliquée : ' + slug)
@@ -161,7 +178,7 @@ def build(root=ROOT, out=None):
         text += seo(path, lang, title, description, other, article, approved) + '</head><body>' + header + '<main id="content">' + body + contact + '</main>' + footer
         target = out / path
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(text)
+        target.write_text(text, encoding='utf-8')
         if approved:
             paths.append(path)
 
@@ -197,13 +214,13 @@ def build(root=ROOT, out=None):
 
     if config.get('cms_enabled'):
         admin = out / 'admin/index.html'
-        admin.write_text('<!doctype html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Decap — Sandokai</title></head><body><script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.3/dist/decap-cms.js"></script></body></html>')
+        admin.write_text('<!doctype html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Decap — Sandokai</title></head><body><script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.3/dist/decap-cms.js"></script></body></html>', encoding='utf-8')
     sitemap = ET.Element('urlset', xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
     if prod:
         for path in paths:
             ET.SubElement(ET.SubElement(sitemap, 'url'), 'loc').text = absolute(path)
     ET.ElementTree(sitemap).write(out / 'sitemap.xml', encoding='utf-8', xml_declaration=True)
-    (out / 'robots.txt').write_text('User-agent: *\nDisallow: /\n' if not prod else 'User-agent: *\nDisallow: /admin/\nSitemap: ' + absolute('sitemap.xml') + '\n')
+    (out / 'robots.txt').write_text('User-agent: *\nDisallow: /\n' if not prod else 'User-agent: *\nDisallow: /admin/\nSitemap: ' + absolute('sitemap.xml') + '\n', encoding='utf-8')
     print(f'{len(list(out.rglob("*.html")))} pages HTML générées; production={prod}; articles={len(articles)}')
     return out
 
