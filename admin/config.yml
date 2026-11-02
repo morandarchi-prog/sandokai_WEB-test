@@ -2,7 +2,7 @@
   "backend": {
     "name": "github",
     "repo": "morandarchi-prog/sandokai_WEB-test",
-    "branch": "feat/articles-bilingues-decap",
+    "branch": "main",
     "base_url": "https://api.netlify.com",
     "auth_endpoint": "auth",
     "site_domain": "strong-frangipane-a8f10f.netlify.app"
