@@ -164,9 +164,9 @@ def build(root=ROOT, out=None):
         source = sources[lang]
         header = re.search(r'<body>(.*?)<main id="content">', source, re.S)[1]
         header = re.sub(r'<nav class="languages".*?</nav>',
-                        '<nav class="languages" aria-label="FR / EN">' +
-                        ''.join(f'<a lang="{code}" hreflang="{code}-CA" href="{rel}{target}"' +
-                                (' aria-current="true"' if lang == code else '') + f'>{code.upper()}</a>'
+                        '<nav class="languages" aria-label="Français / English">' +
+                        '<span aria-hidden="true">/</span>'.join(f'<a lang="{code}" hreflang="{code}-CA" href="{rel}{target}"' +
+                                (' aria-current="true"' if lang == code else '') + f'>{"Français" if code == "fr" else "English"}</a>'
                                 for code, target in [('fr', path if lang == 'fr' else other), ('en', path if lang == 'en' else other)]) + '</nav>', header)
         header = header.replace(' aria-current="page"', '')
         for name in ['index.html', 'iaido.html', 'jodo.html', 'articles.html']:
