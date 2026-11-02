@@ -15,3 +15,18 @@
 
 .contact-social{margin-top:28px}.contact-social>p{font-size:14px;margin-bottom:6px}.social-links{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.social-links a{display:inline-flex;align-items:center;gap:9px;min-width:44px;min-height:44px;color:#fff;text-decoration:none;font-size:14px;padding:6px 8px;border-radius:3px}.social-links a:hover{background:#ffffff15}.social-links svg{width:22px;height:22px;flex-shrink:0}.site-footer{align-items:center}.site-footer .social-links{justify-content:flex-end}.site-footer .social-links a{color:#fff}.site-footer .social-links a span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 @media(max-width:580px){.site-footer{align-items:flex-start}.site-footer .social-links{justify-content:flex-start}}
+
+/* Home introduction and direct access to the two disciplines. */
+.hero-home .hero-copy{max-width:62ch}
+.hero-home .hero-copy p{font-size:20px;line-height:1.6;margin-bottom:20px}
+.hero-home .hero-copy p:last-child{margin-bottom:0}
+.hero-home .hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:24px 36px;margin-top:30px}
+.disciplines-home{border-top:0;padding-top:0}
+.disciplines-home .discipline-grid{margin-top:0}
+.disciplines-home .discipline-grid h2{font-size:56px;letter-spacing:-.03em;margin-bottom:8px}
+@media(max-width:580px){
+  .hero-home .hero-copy p{font-size:18px}
+  .hero-home .hero-actions{flex-direction:column;align-items:stretch;gap:18px;max-width:370px}
+  .hero-home .hero-actions .text-link{justify-content:space-between}
+  .disciplines-home .discipline-grid h2{font-size:48px}
+}
