@@ -1,0 +1,22 @@
+name: Vérification du site et des articles
+on:
+  pull_request:
+  push:
+    branches: [main, feat/articles-bilingues-decap]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Générer et tester (Python 3 fourni par Ubuntu)
+        run: python3 -m unittest discover -s tests -v
+      - name: Générer le site statique
+        run: python3 tools/build.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: sandokai-site-a-valider
+          path: _site
+          include-hidden-files: true
+# Aucun déploiement. Ne pas ajouter de job Pages avant validation de l’hébergement.

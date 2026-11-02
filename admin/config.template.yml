@@ -1,0 +1,69 @@
+# Copier vers admin/config.yml seulement après configuration et test OAuth.
+backend:
+  name: github
+  repo: morandarchi-prog/sandokai_WEB-test
+  branch: main
+  base_url: https://OAUTH_HOST_A_CONFIGURER.invalid
+  auth_endpoint: auth
+publish_mode: editorial_workflow
+media_folder: assets/articles
+public_folder: /assets/articles
+collections:
+  - name: articles
+    label: Articles bilingues
+    folder: content/articles
+    create: true
+    format: json
+    extension: json
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{slug}}'
+    fields:
+      - {label: Adresse permanente (ne plus modifier après publication), name: slug, widget: string, pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', 'Minuscules, chiffres et tirets seulement']}
+      - {label: Publier après validation française, name: published, widget: boolean, default: false}
+      - {label: Traduction anglaise approuvée, name: english_approved, widget: boolean, default: false}
+      - label: Français
+        name: fr
+        widget: object
+        fields: &translation
+          - {label: Titre, name: title, widget: string}
+          - {label: Description SEO, name: description, widget: text}
+          - label: Image de présentation
+            name: image
+            widget: image
+            required: false
+          - {label: Description de l’image, name: alt, widget: string, required: false}
+          - label: Contenu (texte intégral)
+            name: blocks
+            widget: list
+            types:
+              - label: Paragraphe
+                name: paragraph
+                widget: object
+                fields:
+                  - {label: Texte, name: text, widget: text}
+              - label: Intertitre H2
+                name: heading
+                widget: object
+                fields:
+                  - {label: Texte, name: text, widget: string}
+              - label: Sous-titre H3
+                name: subheading
+                widget: object
+                fields:
+                  - {label: Texte, name: text, widget: string}
+              - label: Citation
+                name: quote
+                widget: object
+                fields:
+                  - {label: Texte, name: text, widget: text}
+              - label: Image
+                name: image
+                widget: object
+                fields:
+                  - {label: Image, name: src, widget: image}
+                  - {label: Description, name: alt, widget: string}
+      - label: English (provisoire avant approbation)
+        name: en
+        widget: object
+        fields: *translation
