@@ -46,7 +46,7 @@ def build(root=ROOT, out=None):
     out.mkdir(parents=True)
     for name in ['assets', 'admin']:
         shutil.copytree(root / name, out / name)
-    for name in ['styles.css', 'script.js', 'articles.css']:
+    for name in ['styles.css', 'script.js', 'articles.css', 'pages.css']:
         shutil.copy2(root / name, out / name)
     (out / '.nojekyll').write_text('', encoding='utf-8')
     paths = []
@@ -83,7 +83,7 @@ def build(root=ROOT, out=None):
     sources = {}
     for lang in ['fr', 'en']:
         prefix = '' if lang == 'fr' else 'en/'
-        for page in ['index.html', 'iaido.html', 'jodo.html']:
+        for page in ( ['index.html', 'iaido.html', 'jodo.html'] + (['apropos.html', 'faq.html'] if lang == 'fr' else ['about.html', 'faq.html'])):
             path = prefix + page
             source = (root / path).read_text(encoding='utf-8')
             # Preserve authored page body; only remove links dependent on the retiring site.
@@ -169,7 +169,7 @@ def build(root=ROOT, out=None):
                                 (' aria-current="true"' if lang == code else '') + f'>{"Français" if code == "fr" else "English"}</a>'
                                 for code, target in [('fr', path if lang == 'fr' else other), ('en', path if lang == 'en' else other)]) + '</nav>', header)
         header = header.replace(' aria-current="page"', '')
-        for name in ['index.html', 'iaido.html', 'jodo.html', 'articles.html']:
+        for name in ['index.html', 'iaido.html', 'jodo.html','apropos.html', 'about.html', 'faq.html','articles.html']:
             header = header.replace(f'href="{name}"', f'href="{rel}{prefix}{name}"')
         header = re.sub(r'src="(?:\.\./)?assets/', f'src="{rel}assets/', header)
         contact = re.search(r'(<section class="contact wrap".*?</main>)', source, re.S)[1].removesuffix('</main>')
