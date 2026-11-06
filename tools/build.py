@@ -97,7 +97,7 @@ def build(root=ROOT, out=None):
                 title += ' (English)'
             source = re.sub(r'<title>.*?</title>', '<title>' + title + '</title>', source)
             description = re.search(r'<meta name="description" content="(.*?)">', source)[1]
-            other = ('en/' if lang == 'fr' else '') + page
+            other = ('en/' if lang == 'fr' else '') + {'apropos.html': 'about.html', 'about.html': 'apropos.html'}.get(page, page)
             source = re.sub(r'<link rel="alternate"[^>]*>', '', source)
             source = source.replace('</head>', seo(path, lang, title, description, other) + '</head>')
             target = out / path
@@ -226,3 +226,4 @@ def build(root=ROOT, out=None):
 
 if __name__ == '__main__':
     build()
+
