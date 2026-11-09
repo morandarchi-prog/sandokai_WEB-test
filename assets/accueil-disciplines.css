@@ -1,0 +1,4 @@
+/* Photos for the two discipline summaries on the home page only. */
+.disciplines-home .discipline-photo{margin:22px 0 24px}
+.disciplines-home .discipline-photo img{display:block;width:100%;max-width:100%;height:auto}
+.disciplines-home .discipline-photo figcaption{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.5}
