@@ -185,8 +185,8 @@ def build(root=ROOT, out=None):
     for lang in ['fr', 'en']:
         prefix = '' if lang == 'fr' else 'en/'
         rel = '../' if lang == 'en' else ''
-        intro = ('Textes et réflexions du Sandokai, école de Iaido et de Jodo à Montréal.' if lang == 'fr' else
-                 'Writing and reflections from Sandokai, a school of Iaido and Jodo in Montreal.')
+        intro = ('Pour les plus curieux, cette section rassemble des réflexions techniques, culturelles et intellectuelles autour du Sandokai, du Kobudo et des voies martiales en général. Bonne lecture !' if lang == 'fr' else
+                 'For curious minds, this section brings together technical, cultural and intellectual reflections on Sandokai, Kobudo and martial ways in general. Enjoy reading!')
         body = f'<section class="article-intro wrap"><p class="eyebrow">Sandokai</p><h1>Articles</h1><p class="lead">{intro}</p></section><section class="article-list wrap" aria-label="Articles">'
         if not articles:
             body += '<p>' + ('Les articles historiques seront disponibles après leur migration.' if lang == 'fr' else 'Historical articles will be available following their migration.') + '</p>'
@@ -226,4 +226,5 @@ def build(root=ROOT, out=None):
 
 if __name__ == '__main__':
     build()
+
 
