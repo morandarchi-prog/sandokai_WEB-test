@@ -173,6 +173,7 @@ def build(root=ROOT, out=None):
             header = header.replace(f'href="{name}"', f'href="{rel}{prefix}{name}"')
         header = re.sub(r'src="(?:\.\./)?assets/', f'src="{rel}assets/', header)
         contact = re.search(r'(<section class="contact wrap".*?</main>)', source, re.S)[1].removesuffix('</main>')
+        contact = contact.replace('href="faq.html"', f'href="{rel}{prefix}faq.html"')
         footer = source.split('</main>', 1)[1]
         text = f'<!doctype html>\n<html lang="{lang}-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#012F6A"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><link rel="stylesheet" href="{rel}styles.css"><link rel="stylesheet" href="{rel}articles.css"><script src="{rel}script.js" defer></script>'
         text += seo(path, lang, title, description, other, article, approved) + '</head><body>' + header + '<main id="content">' + body + contact + '</main>' + footer

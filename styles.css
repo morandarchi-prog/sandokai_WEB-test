@@ -30,3 +30,11 @@
   .hero-home .hero-actions .text-link{justify-content:space-between}
   .disciplines-home .discipline-grid h2{font-size:48px}
 }
+
+/* Practical information: homepage and shared contact sections. */
+.practice-home{border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:64px;padding-block:32px}
+.practice-home h2{font-size:30px;margin-bottom:16px}.practice-home h3,.practice-contact h3{font-size:20px;margin-bottom:12px}
+.practice-home p{max-width:45ch;margin-bottom:0}.practice-home ul,.practice-contact ul{padding-left:1.2em;margin:0 0 16px;color:var(--muted)}
+.practice-home a,.practice-contact a{display:inline-block;padding-block:8px;font-size:16px}
+.practice-contact{margin-top:30px}.practice-contact p{margin-bottom:12px;font-size:17px}.practice-contact ul{font-size:17px}
+@media(max-width:850px){.practice-home{gap:36px}}@media(max-width:580px){.practice-home{grid-template-columns:1fr;gap:24px}.practice-home h2{font-size:27px}}
