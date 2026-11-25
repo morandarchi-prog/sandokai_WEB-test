@@ -5,3 +5,9 @@
 
 /* Align the summary text with the full width of its photo. */
 .disciplines-home .discipline-grid article>p:not(.school):not(.subtitle){width:100%;max-width:none}
+
+/* Group training photo between the discipline summaries and Contact. */
+.training-photo{margin-block:0 44px}
+.training-photo img{display:block;width:100%;max-width:100%;height:auto}
+.training-photo figcaption{margin-top:10px;color:var(--muted);font-size:13px;line-height:1.5;font-style:italic;font-synthesis:style}
+@media(max-width:580px){.training-photo{margin-bottom:32px}}
