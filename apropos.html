@@ -14,6 +14,17 @@
 <style>
 /* Keep a single separator before the contact section. */
 .page-sections article:last-child{border-bottom:0}
+/* Anniversary photograph: preserve its full composition. */
+.about-photo{margin-top:0;margin-bottom:52px}
+.about-photo img{display:block;width:100%;height:auto}
+.about-photo figcaption{font-size:14px;font-style:italic;color:var(--muted);line-height:1.5;margin-top:12px}
+@media(max-width:580px){.about-photo{margin-bottom:32px}.about-photo figcaption{font-size:13px}}
+/* Same heading-and-image column used on the Iaido and Jodo pages. */
+.page-sections .origins-visual{min-width:0}
+.page-sections .origins-visual figure{margin:26px 0 0}
+.page-sections .origins-visual img{display:block;width:100%;height:auto}
+.page-sections .origins-visual figcaption{font-size:14px;font-style:italic;color:var(--muted);margin-top:10px;line-height:1.5}
+@media(max-width:850px){.page-sections .origins-visual{grid-column:2}}
 </style>
 </head>
 <body>
@@ -30,10 +41,20 @@
 <p class="detail-subtitle">Un héritage à transmettre</p>
 <p class="lead">Le Sandokai est né d’une volonté : transmettre un enseignement reçu des maîtres japonais tout en poursuivant une recherche personnelle à travers les arts martiaux. Son histoire est celle de rencontres et de liens entre maîtres et élèves, avec une même aspiration : faire vivre une tradition ancienne au service de l’individu d’aujourd’hui.</p>
 </section>
+<figure class="about-photo wrap">
+<img src="assets/images/apropos-genest-pearson-40e.jpg" alt="Genest sensei et Pearson sensei à l'occasion du 40e anniversaire du Sandokai" width="1200" height="960" loading="lazy" decoding="async">
+<figcaption>Genest sensei et Pearson sensei à l'occasion du 40e anniversaire du Sandokai</figcaption>
+</figure>
 <section class="study wrap page-sections" aria-label="Sections">
 <article>
 <span class="number" aria-hidden="true">01 /</span>
+<div class="origins-visual">
 <h2>Nos origines</h2>
+<figure>
+<img src="assets/images/apropos-genest-mitsuzuka.jpg" alt="Genest sensei et Mitsuzuka sensei." width="1200" height="845" loading="lazy" decoding="async">
+<figcaption>Genest sensei et Mitsuzuka sensei.</figcaption>
+</figure>
+</div>
 <div class="section-copy">
 <p>Réal Genest fonde officiellement le Sandokai Kobudo Shugyokai en 1983, lors du lancement d’un premier cours de shinai geiko, ou kendō sportif, au cégep de Saint-Jérôme.</p>
 <p>À la demande des maîtres Takeshi Mitsuzuka et Yanagiya Kosan, il réunit des personnes qui partagent un intérêt pour la culture japonaise et la recherche d’une voie spirituelle. Cette initiative prolonge son apprentissage au Japon et les années de pratique qui suivent son retour au Canada, en 1974.</p>
@@ -43,7 +64,13 @@
 </article>
 <article>
 <span class="number" aria-hidden="true">02 /</span>
+<div class="origins-visual">
 <h2>Les maîtres qui ont marqué son parcours</h2>
+<figure>
+<img src="assets/images/apropos-kosan-genest.jpg" alt="Kosan sensei et Genest sensei" width="1200" height="817" loading="lazy" decoding="async">
+<figcaption>Kosan sensei et Genest sensei</figcaption>
+</figure>
+</div>
 <div class="section-copy">
 <p>Plusieurs maîtres ont contribué à la formation de Réal Genest : <strong>Yanagiya Kosan</strong>, professeur de kendō et maître de rakugo, l’art du récit japonais; <strong>Takeshi Mitsuzuka</strong>, en iaidō et en jōdō; <strong>Tsunemori Kaminoda</strong>, maître du Shindō Musō Ryū jōdō et du Musō Shinden Ryū iaidō; et <strong>Masatoshi Nakayama</strong>, figure majeure du karaté Shōtōkan.</p>
 <p>Au-delà de leurs enseignements, Réal Genest souligne la bienveillance avec laquelle ils l’ont accueilli. Leur exemple demeure une référence dans sa manière d’enseigner et d’accompagner les élèves.</p>
@@ -78,4 +105,3 @@
 <footer class="site-footer wrap"><p>© <span id="annee">2026</span> Sandokai Kobudō Shugyōkai</p><nav class="social-links" aria-label="Réseaux sociaux"><a href="https://www.facebook.com/SandokaiMontreal" aria-label="Facebook — Sandokai" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14 22v-9h3l.5-4H14V6.5c0-1.2.4-2 2-2h1.7V1.1A23 23 0 0 0 15.2 1C12.5 1 10.5 2.7 10.5 5.8V9H7v4h3.5v9Z"/></svg><span>Facebook</span></a><a href="https://www.instagram.com/sandokai_kobudo/" aria-label="Instagram — Sandokai" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg><span>Instagram</span></a></nav></footer>
 </body>
 </html>
-
